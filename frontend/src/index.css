@@ -1,0 +1,17 @@
+/* @import "tailwindcss"; */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+*{
+   margin: 0px;
+   padding: 0px;
+}
+li{
+   padding-left: 15px;
+}
+
+.pop_up{
+   position: fixed;
+   top: 30%;
+   left: 40%;
+   border: 10px solid black;
+}
