@@ -32,8 +32,23 @@ const productControllerList = (req, res) => {
 }
 
 
-const DeleteProduct = (req, res) => {
+const productControllerSingleData = (req, res) => {
+     try {
+        let result = products;
+        let { id } = req.params;
+        if (!id) {
+            return res.send("Something went Wrong")
+        }
+        result = products.find(item => item.id==id)
+        console.log(result,"result")
+        if (!result) {
+            return res.send("Product not found")
+        }
+        return res.send(JSON.stringify(result))
+    } catch (err) {
+        console.log(err)
+    }
 
 }
 
-module.exports = { productControllerList, DeleteProduct }
+module.exports = { productControllerList, productControllerSingleData }

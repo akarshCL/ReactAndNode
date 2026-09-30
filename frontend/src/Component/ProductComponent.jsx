@@ -1,43 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Store } from '../ContextProvider/AppProvider';
 
 const ProductComponent = () => {
-    const [data, setData] = useState(null);
-    // async function fetchs() {
-    //     console.log('data fetching');
-    //     let data = await fetch('http://localhost:3000/product/productList');
-    //     let res = await data.json();
-    //     // console.log(res,"res")
-    //     localStorage.setItem('product', JSON.stringify(res));
-    // }
-    // let localData = localStorage.getItem('product');
-useEffect(() => {
+    // const [data, setData] = useState(null);
+       const {list,setSingleData}=useContext(Store)
+    let navigate=useNavigate();
 
-        // Load data from localStorage
-        const loadProducts = () => {
-            const localData = localStorage.getItem('product');
+    // useEffect(() => {
+        // const loadProducts = () => { /// this code is not in use as we are using context API
+        //     const localData = localStorage.getItem('product');
 
-            if (localData) {
-                setData(JSON.parse(localData));
-            }
-        };
-        // Initial load
-        loadProducts();
-        // Listen for localStorage update
-        window.addEventListener('productUpdated', loadProducts);
-        // Cleanup
-        return () => {
-            window.removeEventListener('productUpdated', loadProducts);
-        };
+        //     if (localData) {
+        //         setData(JSON.parse(localData));
+        //     }
+        // };
+        // loadProducts();
+        // window.addEventListener('productUpdated', loadProducts);
 
-    }, []);
+        // return () => {
+        //     window.removeEventListener('productUpdated', loadProducts);
+        // };
+    // }, []);
 
     return (
-        <div className='flex flex-wrap gap-2 justify-center'>
-            {console.log(data)}
+        <div className='flex flex-wrap gap-10 justify-center mt-10'>
+            {/* {console.log(data)} */}
 
-            {data && (
+            {list && (
                 <>
-                    {data.map((item, index) => {
+                    {list.map((item, index) => {
                         return (
                             <>
                                 <div
@@ -49,7 +41,8 @@ useEffect(() => {
                                         class='h-44 bg-gradient-to-br from-gray-100 to-gray-200 
               flex items-center justify-center'
                                     >
-                                        <span class='text-6xl'>🎧</span>
+                                        <img src={item.image} alt='pro_img' width="100px" height="100px"/>
+                                       
                                     </div>
 
                                     <div class='p-5'>
@@ -65,15 +58,23 @@ useEffect(() => {
                                         </div>
 
                                         <h2 class='text-xl font-bold text-gray-800 mb-2'>{item.title}</h2>
+                                         
 
-                                        <p class='text-xs text-gray-400 mb-4'>Product ID: #1</p>
+                                     <div className='flex justify-between'>
+                                           <p class='text-xs text-gray-400 mb-4'>Product ID: {item.id}</p>
+                                         <p className='cursor-pointer' onClick={()=>{
+                                            navigate(`/product/${item.id}`);
+                                            setSingleData({})
+                                            
+                                         }}>See Details...</p>
+                                     </div>
 
                                         <div class='flex items-center justify-between mb-4'>
                                             <span class='text-2xl font-bold text-gray-900'>₹{item.price}</span>
 
                                             <span class='text-sm text-green-600 font-medium'>{item.stock} in stock</span>
                                         </div>
-
+                                       
                                         <button
                                             class='w-full rounded-xl bg-black text-white py-3 
                    font-semibold hover:bg-gray-800 
