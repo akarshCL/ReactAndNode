@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Store } from '../ContextProvider/AppProvider';
+import axios from "axios"
 
 const DetailedProductPage = () => {
     let { id } = useParams();
@@ -9,16 +10,15 @@ const DetailedProductPage = () => {
 const {singleData,setSingleData}=useContext(Store);
 
    useEffect(() => {
-        console.log("kjh")
+       
         fetchData(id);
     }, []);
 
     const fetchData = async (id) => {
-        let data = await fetch(`http://localhost:3000/product/productList/${id}`);
-        let res = await data.json();
-        setSingleData(res)
-        
-        
+        let res = await axios.get(`http://localhost:3000/product/productList/${id}`);
+        console.log(res,"data")
+        // let res = await data.data();
+        setSingleData(res.data)
     };
 
  

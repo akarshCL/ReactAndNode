@@ -27,7 +27,6 @@ const products = [
     seller: "TechWorld",
     warranty: "1 Year Manufacturer Warranty"
   },
-
   {
     id: 2,
     title: "Smart Watch",
@@ -859,4 +858,6 @@ const products = [
   }
 ];
 
-module.exports = { products };
+
+let UserDB=[]
+module.exports = { products ,UserDB};

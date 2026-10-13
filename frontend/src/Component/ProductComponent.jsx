@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../ContextProvider/AppProvider';
 
@@ -23,9 +23,44 @@ const ProductComponent = () => {
         // };
     // }, []);
 
-    return (
+// useMemo, memo, use Callback, lazyloading, suspense, custome hook use hook
+
+let initial={
+    count:0,
+    role:"",
+    list:[]
+}
+
+const [state,dispatch]=useReducer(reducer,initial)
+    function reducer(state,action){
+        console.log(state,"state")
+        console.log(action,"action")
+        switch(action.type){
+            case "Add":
+                return {
+                    ...state,
+                    count:state.count+1,
+                }
+            case "sub":
+                return {
+                    ...state,
+                    count:state.count-1
+                }
+            default:
+                return state
+        }
+    }
+return (
         <div className='flex flex-wrap gap-10 justify-center mt-10'>
             {/* {console.log(data)} */}
+{/*
+<button onClick={()=>{
+    dispatch({type:"Add",payload:""})
+}}>Click toi change State {state?.count}</button> */}
+
+{/* <button onClick={()=>{
+    dispatch({type:"sub"})
+}}>Click toi change State {state?.count}</button> */}
 
             {list && (
                 <>
@@ -33,22 +68,22 @@ const ProductComponent = () => {
                         return (
                             <>
                                 <div
-                                    class='w-80 overflow-hidden rounded-2xl bg-white shadow-lg 
-            border border-gray-100 hover:shadow-2xl 
+                                    class='w-80 overflow-hidden rounded-2xl bg-white shadow-lg
+            border border-gray-100 hover:shadow-2xl
             transition duration-300'
                                 >
                                     <div
-                                        class='h-44 bg-gradient-to-br from-gray-100 to-gray-200 
+                                        class='h-44 bg-gradient-to-br from-gray-100 to-gray-200
               flex items-center justify-center'
                                     >
                                         <img src={item.image} alt='pro_img' width="100px" height="100px"/>
-                                       
+
                                     </div>
 
                                     <div class='p-5'>
                                         <div class='flex items-center justify-between mb-3'>
                                             <span
-                                                class='px-3 py-1 text-xs font-semibold rounded-full 
+                                                class='px-3 py-1 text-xs font-semibold rounded-full
                    bg-blue-100 text-blue-600'
                                             >
                                                 {item.category}
@@ -58,14 +93,13 @@ const ProductComponent = () => {
                                         </div>
 
                                         <h2 class='text-xl font-bold text-gray-800 mb-2'>{item.title}</h2>
-                                         
 
                                      <div className='flex justify-between'>
                                            <p class='text-xs text-gray-400 mb-4'>Product ID: {item.id}</p>
                                          <p className='cursor-pointer' onClick={()=>{
                                             navigate(`/product/${item.id}`);
                                             setSingleData({})
-                                            
+
                                          }}>See Details...</p>
                                      </div>
 
@@ -74,10 +108,10 @@ const ProductComponent = () => {
 
                                             <span class='text-sm text-green-600 font-medium'>{item.stock} in stock</span>
                                         </div>
-                                       
+
                                         <button
-                                            class='w-full rounded-xl bg-black text-white py-3 
-                   font-semibold hover:bg-gray-800 
+                                            class='w-full rounded-xl bg-black text-white py-3
+                   font-semibold hover:bg-gray-800
                    active:scale-95 transition'
                                         >
                                             Add to Cart
@@ -94,3 +128,8 @@ const ProductComponent = () => {
 };
 
 export default ProductComponent;
+
+// useMemo hook
+// is just to use for memorizing the higher calculation . or to preventing the from the recaclaution
+// useCallback hook  memorice function
+

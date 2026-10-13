@@ -3,10 +3,14 @@ import ProductComponent from '../Component/ProductComponent'
 
 const ProductPage = () => {
   return (
-    <div>
+    <div >
         <ProductComponent/>
     </div>
   )
 }
 
 export default ProductPage
+
+
+
+

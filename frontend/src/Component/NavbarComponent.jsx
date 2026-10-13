@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Store } from '../ContextProvider/AppProvider';
+import useCounter from '../CoustomHook/useCounter';
 
 const NavbarComponent = () => {
+    useCounter
     const navigate=useNavigate();
     const [active, setActive] = useState('');
     // const [search, setSearch] = useState(''); //1//2// not in use as we are useing from our context chanel

@@ -51,4 +51,19 @@ const productControllerSingleData = (req, res) => {
 
 }
 
-module.exports = { productControllerList, productControllerSingleData }
+
+
+const createProduct=(req,res)=>{
+   try{
+     const data=req.body;
+     console.log(data)
+     products.push(data)
+     return res.send({msg:"successfully stored!!",productId:data?.id})
+
+   }catch(err){
+    console.log(err);
+    return res.send ({msg:"something went wrong."})
+   }
+}
+
+module.exports = { productControllerList, productControllerSingleData ,createProduct}

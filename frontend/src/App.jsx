@@ -15,6 +15,7 @@ import User from './User/User';
 import Protected from './protectedRoutes/protected';
 import Login from './Component/Login';
 import User_Collection from './Admin/User_Collection';
+import Parent from './UseCallbackExample/Parent';
 const App = () => {
   
         const data = localStorage.getItem('role');
@@ -26,6 +27,7 @@ const App = () => {
             {console.log(data, 'data')}
 
             <Routes>
+                <Route path='/UseCallback' element={<Parent/>}/>
                 <Route path='/' element={<ProductPage />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/contact' element={<Contact />} />
